@@ -1,2 +1,9 @@
-<p>shared works!</p>
-<aa-button>Test Button</aa-button>
+<aa-button (click)="onPatchValue()">Patch Value</aa-button>
+
+<form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
+  <aa-input formControlName="input"></aa-input>
+</form>
+
+<code>
+  {{ form.value | json }}
+</code>

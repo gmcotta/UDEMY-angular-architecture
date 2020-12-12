@@ -16,8 +16,8 @@ export class AppComponent implements OnInit {
     this.ngFirestore
       .collection('test')
       .snapshotChanges()
-      .subscribe(data => {
-        console.log(data);
+      .subscribe(items => {
+        items.map(item => console.log(item.payload.doc.data()));
       });
   }
 

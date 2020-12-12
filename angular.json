@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/aa-project",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -33,33 +33,42 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": true,
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true,
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "500kb",
+                "maximumError": "1mb"
+              },
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "2kb",
+                "maximumError": "4kb"
+              }
+            ]
           },
           "configurations": {
-            "production": {
+            "prod": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
+              "sourceMap": false
+            },
+            "dev": {
+              "fileReplacements": [
                 {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
                 }
               ]
             }
@@ -68,11 +77,15 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "aa-project:build"
+            "browserTarget": "aa-project:build",
+            "port": 5200
           },
           "configurations": {
-            "production": {
-              "browserTarget": "aa-project:build:production"
+            "prod": {
+              "browserTarget": "aa-project:build:prod"
+            },
+            "dev": {
+              "browserTarget": "aa-project:build:dev"
             }
           }
         },

@@ -1,7 +1,23 @@
+<h2>Form</h2>
+
 <aa-button (click)="onPatchValue()">Patch Value</aa-button>
+<aa-button (click)="onToggleInline()">Toggle Inline</aa-button>
+
+<br>
+<br>
+<br>
 
 <form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
-  <aa-input formControlName="input"></aa-input>
+  
+  <aa-form-field 
+    label="Input" 
+    [required]=true 
+    [control]="form.controls.input"
+    [isInline]="isInline"
+  >
+    <aa-input formControlName="input"></aa-input>
+  </aa-form-field>
+
 </form>
 
 <code>

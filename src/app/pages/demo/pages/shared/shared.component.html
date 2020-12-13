@@ -28,6 +28,16 @@
     <aa-password formControlName="password"></aa-password>
   </aa-form-field>
 
+  <aa-form-field
+    label="Select"
+    [required]=true
+    [control]="form.controls.select"
+    [isInline]="isInline"
+  >
+    <aa-select formControlName="select" [items]="items"></aa-select>
+  </aa-form-field>
+
+
 </form>
 
 <code>

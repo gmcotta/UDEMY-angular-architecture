@@ -37,6 +37,15 @@
     <aa-select formControlName="select" [items]="items"></aa-select>
   </aa-form-field>
 
+  <aa-form-field
+    label="Checkboxes"
+    [required]=true
+    [control]="form.controls.checkboxes"
+    [isInline]="isInline"
+  >
+    <aa-checkboxes formControlName="checkboxes" [items]="items"></aa-checkboxes>
+  </aa-form-field>
+
 
 </form>
 

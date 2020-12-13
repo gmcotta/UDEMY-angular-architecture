@@ -1,13 +1,13 @@
-@import 'styles/colors';
+@import 'styles/colors.scss';
 
-.checkbox {
+.radio {
   display: block;
   position: relative;
   text-indent: 30px;
   margin: 8px 0;
   padding: 0 20px 0 0;
   cursor: pointer;
-  
+
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -21,18 +21,18 @@
     width: 0;
 
     &:checked {
-      &~.checkbox__checkmark {
+      &~.radio__checkmark {
         background-color: $primary;
 
         &::after {
+          content: '';
           display: block;
-          left: 7px;
-          top: 3px;
-          width: 4px;
+          background: #fff;
+          width: 8px;
           height: 8px;
-          border: solid #fff;
-          border-width: 0 3px 3px 0;
-          transform: rotate(45deg);
+          border-radius: 50%;
+          left: 6px;
+          top: 6px;
         }
       }
     }
@@ -44,9 +44,9 @@
     left: 0;
     height: 20px;
     width: 20px;
-    border-radius: 4px;
+    border-radius: 50%;
     background-color: #eee;
-  
+
     &::after {
       content: '';
       position: absolute;
@@ -59,17 +59,18 @@
   }
 
   &:hover {
-    .checkbox__checkmark {
+    .radio__checkmark {
       background-color: #ccc;
     }
-    .checkbox__input:checked ~.checkbox__checkmark {
+
+    .radio__input:checked ~.radio__checkmark {
       background-color: $primary-dark;
     }
   }
 }
 
 :host-context(.form-field_error) {
-  .checkbox__checkmark {
+  .radio__checkmark {
     border: 1px solid $error;
   }
 }

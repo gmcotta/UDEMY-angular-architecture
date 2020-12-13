@@ -46,6 +46,15 @@
     <aa-checkboxes formControlName="checkboxes" [items]="items"></aa-checkboxes>
   </aa-form-field>
 
+  <aa-form-field
+    label="Radios"
+    [required]=true
+    [control]="form.controls.radios"
+    [isInline]="isInline"
+  >
+    <aa-radios formControlName="radios" [items]="items"></aa-radios>
+  </aa-form-field>
+
 
 </form>
 

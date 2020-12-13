@@ -55,6 +55,15 @@
     <aa-radios formControlName="radios" [items]="items"></aa-radios>
   </aa-form-field>
 
+  <aa-form-field
+    label="Date"
+    [required]=true
+    [control]="form.controls.date"
+    [isInline]="isInline"
+  >
+    <aa-date formControlName="date"></aa-date>
+  </aa-form-field>
+
 
 </form>
 

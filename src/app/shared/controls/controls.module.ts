@@ -6,6 +6,7 @@ import { PasswordModule } from './password/password.module';
 import { SelectModule } from './select/select.module';
 import { CheckboxesModule } from './checkboxes/checkboxes.module';
 import { RadiosModule } from './radios/radios.module';
+import { DateModule } from './date/date.module';
 
 
 
@@ -19,6 +20,7 @@ import { RadiosModule } from './radios/radios.module';
     SelectModule,
     CheckboxesModule,
     RadiosModule,
+    DateModule,
   ],
   exports: [
     InputModule,
@@ -27,6 +29,7 @@ import { RadiosModule } from './radios/radios.module';
     SelectModule,
     CheckboxesModule,
     RadiosModule,
+    DateModule,
   ],
 })
 export class ControlsModule { }

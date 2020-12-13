@@ -12,22 +12,22 @@
     <div class="form-field__error">
       <ng-container *ngIf="control && errorKey" [ngSwitch]="errorKey">
         <span *ngSwitchCase="'min'">
-          Minimum {{control?.errors[errorKey].min}}
+          <!-- Minimum {{control?.errors[errorKey].min}} -->
         </span>
         <span *ngSwitchCase="'max'">
-          Maximum {{control?.errors[errorKey].max}}
+          <!-- Maximum {{control?.errors[errorKey].max}} -->
         </span>
         <span *ngSwitchCase="'required'">
-          This field is required
+          <!-- This field is required -->
         </span>
         <span *ngSwitchCase="'requiredtrue'">
           This field is required
         </span>
         <span *ngSwitchCase="'minlength'">
-          At least {{control?.errors[errorKey].requiredLength}} characters
+          <!-- At least {{control?.errors[errorKey].requiredLength}} characters -->
         </span>
         <span *ngSwitchCase="'maxlength'">
-          No more than {{control?.errors[errorKey].requiredLength}} characters
+          <!-- No more than {{control?.errors[errorKey].requiredLength}} characters -->
         </span>
         <span *ngSwitchCase="'pattern'">
           <span *ngIf="patternError">{{patternError}}</span>

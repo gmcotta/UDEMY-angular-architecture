@@ -19,6 +19,15 @@
     <aa-input formControlName="input"></aa-input>
   </aa-form-field>
 
+  <aa-form-field
+    label="Password"
+    [required]=true
+    [control]="form.controls.password"
+    [isInline]="isInline"
+  >
+    <aa-password formControlName="password"></aa-password>
+  </aa-form-field>
+
 </form>
 
 <code>

@@ -30,6 +30,8 @@
           No more than {{control?.errors[errorKey].requiredLength}} characters
         </span>
         <span *ngSwitchCase="'pattern'">
+          <span *ngIf="patternError">{{patternError}}</span>
+          <span *ngIf="!patternError">Pattern does not match</span>
         </span>
       </ng-container>
     </div>

@@ -12,6 +12,7 @@ export class FormFieldComponent implements OnInit {
   @Input() required: boolean = true;
   @Input() isInline: boolean = true;
   @Input() control?: AbstractControl;
+  @Input() patternError?: string;
 
   constructor() { }
 
@@ -22,12 +23,10 @@ export class FormFieldComponent implements OnInit {
     return this.control && this.control.invalid && this.control.touched;
   }
 
-  get errorKey(): string {
-    if (this.control?.errors) return Object.keys(this.control.errors)[0];
-    return '';
-    // return this.control 
-    //   && this.control.errors 
-    //   && Object.keys(this.control.errors)[0];
+  get errorKey() {
+    return this.control 
+      && this.control.errors 
+      && Object.keys(this.control.errors)[0];
   }
 
 }

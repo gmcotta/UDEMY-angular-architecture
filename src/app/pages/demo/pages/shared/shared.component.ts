@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { regex, regexErrorMessages } from '@app/shared';
 
 @Component({
   selector: 'aa-shared',
@@ -10,6 +11,7 @@ export class SharedComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
   isInline = true;
+  regexErrorMessages = regexErrorMessages;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -20,6 +22,7 @@ export class SharedComponent implements OnInit {
         validators: [
           Validators.required,
           Validators.minLength(3),
+          Validators.pattern(regex.numbers),
         ]
       }],
     });

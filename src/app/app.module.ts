@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HeaderComponent } from './components/header/header.component';
+import { NotificationModule } from './services/notification/notification.module';
 
 const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -44,6 +45,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
     AngularFireAuthModule,
     AngularFireStorageModule,
     MatNativeDateModule,
+    NotificationModule.forRoot(),
     AppRoutingModule,
   ],
   providers: [

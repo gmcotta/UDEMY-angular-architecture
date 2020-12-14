@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ControlItem } from '@app/models/frontend';
+import { NotificationService } from '@app/services/notification/notification.service';
 import { regex, regexErrorMessages, markFormGroupTouched } from '@app/shared';
 
 @Component({
@@ -23,7 +24,10 @@ export class SharedComponent implements OnInit {
     { label: 'Fifth', value: 5 },
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private notificationService: NotificationService,
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -120,10 +124,10 @@ export class SharedComponent implements OnInit {
   }
 
   onError(): void {
-
+    this.notificationService.error('Something is wrong');
   }
 
   onSuccess(): void {
-    
+    this.notificationService.success('Everything is fine!');
   }
 }

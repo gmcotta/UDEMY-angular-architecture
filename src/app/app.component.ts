@@ -13,13 +13,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.ngFirestore
-      .collection('test')
-      .snapshotChanges()
-      .subscribe(items => {
-        items.map(item => console.log(item.payload.doc.data()));
-      });
-  }
 
-  title = 'aa-project';
+  }
 }

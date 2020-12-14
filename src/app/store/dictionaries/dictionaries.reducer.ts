@@ -2,9 +2,9 @@ import { Dictionaries } from './dictionaries.models';
 import * as fromActions from './dictionaries.actions';
 
 export interface DictionariesState {
-  entities: Dictionaries;
-  loading: boolean;
-  error: string;
+  entities: Dictionaries | null;
+  loading: boolean | null;
+  error: string | null;
 }
 
 const initialState: DictionariesState = {

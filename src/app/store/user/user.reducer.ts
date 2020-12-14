@@ -4,7 +4,7 @@ import {} from './user.models';
 
 export interface UserState {
   entity: User | null;
-  uid: string | null;
+  uid: string | undefined | null;
   loading: boolean | null;
   error: string | null;
 }

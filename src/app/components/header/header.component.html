@@ -8,19 +8,31 @@
     >
       Demo
     </a>
-    <a 
-      class="app-a" 
-      [routerLink]="['auth', 'login']" 
-      routerLinkActive="app-a_active"
-    >
-      Log in
-    </a>
-    <a 
-      class="app-a" 
-      [routerLink]="['auth', 'registration']" 
-      routerLinkActive="app-a_active"
-    >
-      Registration
-    </a>
+
+    <div *ngIf="!isAuthorized">
+      <a 
+        class="app-a" 
+        [routerLink]="['auth', 'login']" 
+        routerLinkActive="app-a_active"
+      >
+        Log in
+      </a>
+      <a 
+        class="app-a" 
+        [routerLink]="['auth', 'registration']" 
+        routerLinkActive="app-a_active"
+      >
+        Registration
+      </a>
+    </div>
+    <div *ngIf="isAuthorized">
+      <a 
+        class="app-a" 
+        routerLinkActive="app-a_active"
+        (click)="onSignOut()"
+      >
+        Log Out
+      </a>
+    </div>
   </div>
 </div>

@@ -10,7 +10,6 @@ import {
   switchMap, 
   catchError, 
   take, 
-  withLatestFrom, 
   tap,
 } from 'rxjs/operators';
 
@@ -30,6 +29,30 @@ export class UserEffects {
     private router: Router,
     private notificationService: NotificationService,
   ) {}
+
+  @Effect()
+  init: Observable<Action> = this.actions.pipe(
+    ofType(fromActions.Types.INIT),
+    switchMap(() => this.afAuth.authState.pipe(
+      take(1)
+    )),
+    switchMap(authState => {
+      if (authState) {
+        return this.afs.doc<User>(`users/${authState.uid}`).valueChanges()
+          .pipe(
+            take(1),
+            map(user => {
+              return new fromActions.InitAuthorized(
+                authState.uid, 
+                user || null
+              );
+            })
+          );
+      } else {
+        return of(new fromActions.InitUnauthorized());
+      }
+    })
+  )
 
   @Effect()
   signUpEmail: Observable<Action> = this.actions.pipe(

@@ -21,6 +21,36 @@ export function reducer(
   action: fromActions.All
 ): UserState {
   switch (action.type) {
+    case fromActions.Types.INIT: {
+      return {
+        ...state,
+        loading: true,
+      };
+    };
+    case fromActions.Types.INIT_AUTHORIZED: {
+      return {
+        ...state,
+        uid: action.uid,
+        entity: action.user,
+        loading: false,
+      };
+    };
+    case fromActions.Types.INIT_UNAUTHORIZED: {
+      return {
+        ...state,
+        loading: false,
+        entity: null,
+        error: null,
+      };
+    };
+    case fromActions.Types.INIT_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    };
+
     case fromActions.Types.SIGN_IN_EMAIL: {
       return { 
         ...state, 
@@ -42,6 +72,7 @@ export function reducer(
         loading: false, 
       };
     };
+    
     case fromActions.Types.SIGN_UP_EMAIL: {
       return { 
         ...state, 
@@ -62,6 +93,7 @@ export function reducer(
         loading: false,
       };
     };
+    
     case fromActions.Types.SIGN_OUT: {
       return { 
         ...state, 
@@ -80,6 +112,7 @@ export function reducer(
         error: action.error,
       };
     };
+    
     default: return { ...state };
   }
 }

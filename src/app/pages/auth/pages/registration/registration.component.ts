@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import * as fromRoot from '@app/store';
+import * as fromUser from '@app/store/user';
 import { markFormGroupTouched, regex, regexErrorMessages } from '@app/shared';
 @Component({
   selector: 'aa-registration',
@@ -15,6 +16,7 @@ export class RegistrationComponent implements OnInit {
 
   form = new FormGroup({});
   regexErrorMessages = regexErrorMessages;
+  loading$ = new Observable<boolean | null>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,6 +24,9 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loading$ = this.store.pipe(
+      select(fromUser.getLoading)
+    );
     this.form = this.formBuilder.group(
       {
         email: [
@@ -67,7 +72,12 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-
+      const values = this.form.value;
+      const credentials: fromUser.EmailPasswordCredentials = {
+        email: values.email,
+        password: values.password,
+      }
+      this.store.dispatch(new fromUser.SignUpEmail(credentials));
     } else {
       markFormGroupTouched(this.form);
     }
@@ -78,9 +88,8 @@ export class RegistrationComponent implements OnInit {
     ): { [key: string]: boolean} | null {
       const password = group.get('password');
       const passwordRepeat = group.get('passwordRepeat');
-      console.log(password?.value, passwordRepeat?.value);
-        return passwordRepeat?.value && password?.value !== passwordRepeat?.value 
-          ? { repeat: true }
-          : null;
+      return passwordRepeat?.value && password?.value !== passwordRepeat?.value 
+        ? { repeat: true }
+        : null;
     }
 }

@@ -43,7 +43,8 @@
     [control]="form.controls.checkboxes"
     [isInline]="isInline"
   >
-    <aa-checkboxes formControlName="checkboxes" [items]="items"></aa-checkboxes>
+    <aa-checkboxes formControlName="checkboxes" [items]="items">
+    </aa-checkboxes>
   </aa-form-field>
 
   <aa-form-field
@@ -71,6 +72,16 @@
     [isInline]="isInline"
   >
     <aa-date-range formControlName="dateRange"></aa-date-range>
+  </aa-form-field>
+
+  <aa-form-field
+    label="Autocomplete"
+    [required]=true
+    [control]="form.controls.autocomplete"
+    [isInline]="isInline"
+  >
+    <aa-autocomplete formControlName="autocomplete" [items]="items">
+    </aa-autocomplete>
   </aa-form-field>
 
 

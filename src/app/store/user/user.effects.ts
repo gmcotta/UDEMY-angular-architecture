@@ -42,9 +42,11 @@ export class UserEffects {
       ))
       .pipe(
         tap(() => from(this.afAuth.currentUser
-          .then(user => user?.sendEmailVerification(
-            environment.firebase.actionCodeSettings
-          )))
+          .then(user => {
+            user?.sendEmailVerification(environment.firebase.actionCodeSettings);
+            this.router.navigate(['auth', 'email-confirm']);
+            })
+          )
         ),
         map(signUpState => {
           return new fromActions.SignUpEmailSuccess(signUpState.user?.uid)}

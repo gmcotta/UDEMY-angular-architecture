@@ -13,6 +13,7 @@ export class SharedComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   isInline = true;
   regexErrorMessages = regexErrorMessages;
+  showSpinner = false;
 
   items: ControlItem[] = [
     { label: 'First', value: 1 },
@@ -115,7 +116,7 @@ export class SharedComponent implements OnInit {
   }
 
   onToggleSpinner(): void {
-
+    this.showSpinner = !this.showSpinner;
   }
 
   onError(): void {

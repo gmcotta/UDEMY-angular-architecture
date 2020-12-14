@@ -4,98 +4,102 @@
 <aa-button (click)="onError()">Error</aa-button>
 <aa-button (click)="onSuccess()">Success</aa-button>
 
-
 <h2>Form</h2>
 
-<aa-button (click)="onPatchValue()">Patch Value</aa-button>
-<aa-button (click)="onToggleInline()">Toggle Inline</aa-button>
-<aa-button (click)="onToggleDisable()">Toggle Disable</aa-button>
-<aa-button (click)="onSubmit()">Submit Form</aa-button>
+<div class="wrapper">
+  <aa-spinner *ngIf="showSpinner"></aa-spinner>
+  <aa-button (click)="onPatchValue()">Patch Value</aa-button>
+  <aa-button (click)="onToggleInline()">Toggle Inline</aa-button>
+  <aa-button (click)="onToggleDisable()">Toggle Disable</aa-button>
+  <aa-button (click)="onSubmit()">Submit Form</aa-button>
 
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
 
-<form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
-  
-  <aa-form-field 
-    label="Input" 
-    [required]=true 
-    [control]="form.controls.input"
-    [isInline]="isInline"
-    [patternError]="regexErrorMessages.numbers"
-  >
-    <aa-input formControlName="input"></aa-input>
-  </aa-form-field>
+  <form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
+    
+    <aa-form-field 
+      label="Input" 
+      [required]=true 
+      [control]="form.controls.input"
+      [isInline]="isInline"
+      [patternError]="regexErrorMessages.numbers"
+    >
+      <aa-input formControlName="input"></aa-input>
+    </aa-form-field>
 
-  <aa-form-field
-    label="Password"
-    [required]=true
-    [control]="form.controls.password"
-    [isInline]="isInline"
-  >
-    <aa-password formControlName="password"></aa-password>
-  </aa-form-field>
+    <aa-form-field
+      label="Password"
+      [required]=true
+      [control]="form.controls.password"
+      [isInline]="isInline"
+    >
+      <aa-password formControlName="password"></aa-password>
+    </aa-form-field>
 
-  <aa-form-field
-    label="Select"
-    [required]=true
-    [control]="form.controls.select"
-    [isInline]="isInline"
-  >
-    <aa-select formControlName="select" [items]="items"></aa-select>
-  </aa-form-field>
+    <aa-form-field
+      label="Select"
+      [required]=true
+      [control]="form.controls.select"
+      [isInline]="isInline"
+    >
+      <aa-select formControlName="select" [items]="items"></aa-select>
+    </aa-form-field>
 
-  <aa-form-field
-    label="Checkboxes"
-    [required]=true
-    [control]="form.controls.checkboxes"
-    [isInline]="isInline"
-  >
-    <aa-checkboxes formControlName="checkboxes" [items]="items">
-    </aa-checkboxes>
-  </aa-form-field>
+    <aa-form-field
+      label="Checkboxes"
+      [required]=true
+      [control]="form.controls.checkboxes"
+      [isInline]="isInline"
+    >
+      <aa-checkboxes formControlName="checkboxes" [items]="items">
+      </aa-checkboxes>
+    </aa-form-field>
 
-  <aa-form-field
-    label="Radios"
-    [required]=true
-    [control]="form.controls.radios"
-    [isInline]="isInline"
-  >
-    <aa-radios formControlName="radios" [items]="items"></aa-radios>
-  </aa-form-field>
+    <aa-form-field
+      label="Radios"
+      [required]=true
+      [control]="form.controls.radios"
+      [isInline]="isInline"
+    >
+      <aa-radios formControlName="radios" [items]="items"></aa-radios>
+    </aa-form-field>
 
-  <aa-form-field
-    label="Date"
-    [required]=true
-    [control]="form.controls.date"
-    [isInline]="isInline"
-  >
-    <aa-date formControlName="date"></aa-date>
-  </aa-form-field>
+    <aa-form-field
+      label="Date"
+      [required]=true
+      [control]="form.controls.date"
+      [isInline]="isInline"
+    >
+      <aa-date formControlName="date"></aa-date>
+    </aa-form-field>
 
-  <aa-form-field
-    label="Date Range"
-    [required]=true
-    [control]="form.controls.dateRange"
-    [isInline]="isInline"
-  >
-    <aa-date-range formControlName="dateRange"></aa-date-range>
-  </aa-form-field>
+    <aa-form-field
+      label="Date Range"
+      [required]=true
+      [control]="form.controls.dateRange"
+      [isInline]="isInline"
+    >
+      <aa-date-range formControlName="dateRange"></aa-date-range>
+    </aa-form-field>
 
-  <aa-form-field
-    label="Autocomplete"
-    [required]=true
-    [control]="form.controls.autocomplete"
-    [isInline]="isInline"
-  >
-    <aa-autocomplete formControlName="autocomplete" [items]="items">
-    </aa-autocomplete>
-  </aa-form-field>
+    <aa-form-field
+      label="Autocomplete"
+      [required]=true
+      [control]="form.controls.autocomplete"
+      [isInline]="isInline"
+    >
+      <aa-autocomplete formControlName="autocomplete" [items]="items">
+      </aa-autocomplete>
+    </aa-form-field>
 
 
-</form>
+  </form>
 
-<code>
-  {{ form.value | json }}
-</code>
+  <code>
+    {{ form.value | json }}
+  </code>
+</div>
+
+

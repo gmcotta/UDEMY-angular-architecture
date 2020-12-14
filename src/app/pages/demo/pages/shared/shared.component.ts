@@ -113,4 +113,16 @@ export class SharedComponent implements OnInit {
       markFormGroupTouched(this.form);
     }
   }
+
+  onToggleSpinner(): void {
+
+  }
+
+  onError(): void {
+
+  }
+
+  onSuccess(): void {
+    
+  }
 }

@@ -1,1 +1,51 @@
-<p>registration works!</p>
+<div class="app-page">
+  <div class="app-page__header">
+    Registration
+  </div>
+
+  <form 
+    novalidate
+    autocomplete="off"
+    [formGroup]="form" 
+    (submit)="onSubmit()" 
+    (keyup.enter)="onSubmit()"
+  >
+    <div class="app-page__content">
+      <aa-form-field
+        label="Email"
+        [required]=true
+        [control]="form.controls.email"
+        [isInline]=false
+        [patternError]="regexErrorMessages.email"
+      >
+        <aa-input formControlName="email"></aa-input>
+      </aa-form-field>
+      <aa-form-field
+        label="Password"
+        [required]=true
+        [control]="form.controls.password"
+        [isInline]=false
+        [patternError]="regexErrorMessages.password"
+      >
+        <aa-password formControlName="password"></aa-password>
+      </aa-form-field>
+      <aa-form-field
+        label="Repeat password"
+        [required]=true
+        [control]="form.controls.passwordRepeat"
+        [isInline]=false
+        [patternError]="regexErrorMessages.password"
+      >
+        <aa-password formControlName="passwordRepeat"></aa-password>
+      </aa-form-field>
+
+      <div class="error" [class.error_active]="form.hasError('repeat')">
+        Entered passwords do not match
+      </div>
+    </div>
+
+    <div class="app-page__footer">
+      <aa-button type="submit">Complete</aa-button>
+    </div>
+  </form>
+</div>

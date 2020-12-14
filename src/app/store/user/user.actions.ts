@@ -24,7 +24,7 @@ export class SignInEmail implements Action {
 }
 export class SignInEmailSuccess implements Action {
   readonly type = Types.SIGN_IN_EMAIL_SUCCESS;
-  constructor(public uid: string, public user: User) {}
+  constructor(public uid: string | undefined, public user: User | null) {}
 }
 export class SignInEmailError implements Action {
   readonly type = Types.SIGN_IN_EMAIL_ERROR;

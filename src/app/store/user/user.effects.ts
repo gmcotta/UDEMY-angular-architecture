@@ -34,27 +34,54 @@ export class UserEffects {
   @Effect()
   signUpEmail: Observable<Action> = this.actions.pipe(
     ofType(fromActions.Types.SIGN_UP_EMAIL),
+    map((action: fromActions.SignUpEmail) => action.credentials),
+    switchMap(credentials => from(
+      this.afAuth.createUserWithEmailAndPassword(
+        credentials.email, 
+        credentials.password
+      ))
+      .pipe(
+        tap(() => from(this.afAuth.currentUser
+          .then(user => user?.sendEmailVerification(
+            environment.firebase.actionCodeSettings
+          )))
+        ),
+        map(signUpState => {
+          return new fromActions.SignUpEmailSuccess(signUpState.user?.uid)}
+        ),
+        catchError(err => {
+          this.notificationService.error(err.message);
+          return of(new fromActions.SignUpEmailError(err.message));
+        })
+      )
+    ),
+  )
+
+  @Effect()
+  signInEmail: Observable<Action> = this.actions.pipe(
+    ofType(fromActions.Types.SIGN_IN_EMAIL),
     map((action: fromActions.SignInEmail) => action.credentials),
     switchMap(credentials => from(
-      this.afAuth
-        .createUserWithEmailAndPassword(
-          credentials.email, 
-          credentials.password
-        ))
-        .pipe(
-          tap(() => this.afAuth.currentUser
-            .then(user => user?.sendEmailVerification(
-              environment.firebase.actionCodeSettings
-            ))
-          ),
-          map(signUpState => {
-            return new fromActions.SignUpEmailSuccess(signUpState.user?.uid)}
-          ),
-          catchError(err => {
-            this.notificationService.error(err.message);
-            return of(new fromActions.SignUpEmailError(err.message));
-          })  
-        )
-    ),
+      this.afAuth.signInWithEmailAndPassword(
+        credentials.email, 
+        credentials.password
+      ))
+      .pipe(
+        switchMap(signInState => {
+          return this.afs.doc<User>(`users/${signInState.user?.uid}`)
+            .valueChanges().pipe(
+              take(1),
+              map(user => new fromActions.SignInEmailSuccess(
+                signInState.user?.uid, 
+                user || null
+              ))
+            )
+        }),
+        catchError(err => {
+          this.notificationService.error(err.message);
+          return of(new fromActions.SignInEmailError(err.message));
+        })
+      )
+    )
   )
 }

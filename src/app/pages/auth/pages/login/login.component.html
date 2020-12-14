@@ -1,1 +1,42 @@
-<p>login works!</p>
+<div class="app-page">
+  <div class="app-page__header">
+    <h1>Log In</h1>
+  </div>
+
+  <form
+    [formGroup]="form"
+    novalidate
+    autocomplete="off"
+    (submit)="onSubmit()"
+    (keyup.enter)="onSubmit()"
+  >
+    <div class="app-page__content">
+      <aa-form-field
+        label="Email"
+        [required]=true
+        [control]="form.controls.email"
+        [isInline]=true
+        [patternError]="regexErrorMessages.email"
+      >
+        <aa-input formControlName="email"></aa-input>
+      </aa-form-field>
+      
+      <aa-form-field
+        label="Password"
+        [required]=true
+        [control]="form.controls.password"
+        [isInline]=true
+        [patternError]="regexErrorMessages.password"
+      >
+        <aa-password formControlName="password"></aa-password>
+      </aa-form-field>
+    </div>
+
+    <div class="app-page__footer">
+      <aa-button type="submit">Log in</aa-button>
+    </div>
+  </form>
+
+  <aa-spinner *ngIf="loading$ | async"></aa-spinner>
+
+</div>

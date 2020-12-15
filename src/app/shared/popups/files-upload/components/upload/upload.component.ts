@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { Observable, Subject } from 'rxjs';
-import { finalize, takeUntil } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { finalize, takeUntil, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'aa-upload',
@@ -43,8 +43,10 @@ export class UploadComponent implements OnInit, OnDestroy {
     this.snapshot$
       .pipe(
         takeUntil(this.destroy),
+        catchError(err => of(console.log(err))),
         finalize(async () => {
-          this.downloadURL = await storageRef.getDownloadURL().toPromise();
+          this.downloadURL = await storageRef.getDownloadURL().toPromise()
+            .catch(err => console.log(err));
           this.completed.next(this.downloadURL);
         })
       )

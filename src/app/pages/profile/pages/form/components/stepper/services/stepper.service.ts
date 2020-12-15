@@ -20,8 +20,8 @@ export class StepperService {
   next = new Subject<boolean>();
   next$ = new Observable<boolean>();
 
-  prev = new Subject<void>();
-  prev$ = this.prev.asObservable();
+  // prev = new Subject<void>();
+  // prev$ = this.prev.asObservable();
 
   complete = new Subject<boolean>();
   complete$ = new Observable<boolean>();
@@ -34,7 +34,7 @@ export class StepperService {
 
   constructor() { 
     this.next$ = this.next.asObservable().pipe(filter(isOk => isOk));
-    this.complete$ = this.next.asObservable().pipe(filter(isOk => isOk));
+    this.complete$ = this.complete.asObservable().pipe(filter(isOk => isOk));
   }
 
   init(steps: Step[]): void {

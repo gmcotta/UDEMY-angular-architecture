@@ -62,6 +62,6 @@ export class StepperComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-
+    this.stepper.cancel.next();
   }
 }

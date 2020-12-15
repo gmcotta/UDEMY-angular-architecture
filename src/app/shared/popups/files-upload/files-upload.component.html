@@ -11,11 +11,21 @@
       (hovered)="toggleHover($event)"
     >
       <div class="dropzone__label">Drop files here or</div>
+
       <div class="dropzone__file">
         <label class="file">
-          <input class="file__input" />
+          <input 
+            class="file__input" 
+            [multiple]="data.multiple"
+            type="file"
+            (change)="onDrop($event)"
+          />
           <span class="file__label">choose</span>
         </label>
+      </div>
+
+      <div class="error" *ngIf="isError">
+        Choose only one file
       </div>
     </div>
   </div>

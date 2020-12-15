@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 export interface Step {
   key: string;
@@ -31,7 +32,10 @@ export class StepperService {
   check = new Subject<'next' | 'complete'>();
   check$ = this.check.asObservable();
 
-  constructor() { }
+  constructor() { 
+    this.next$ = this.next.asObservable().pipe(filter(isOk => isOk));
+    this.complete$ = this.next.asObservable().pipe(filter(isOk => isOk));
+  }
 
   init(steps: Step[]): void {
     this.steps = steps;

@@ -42,9 +42,17 @@
       >
       </aa-upload>
     </ng-container>
+
+    <ng-container *ngIf="files">
+      <aa-upload
+        *ngFor="let file of files"
+        [file]="file"
+        (completed)="onUploadComplete($event)"
+      ></aa-upload>
+    </ng-container>
   </div>
 
-  <div class="files-upload__footer">
+  <div class="files-upload__footer" *ngIf="!imageFile">
     <button
       *ngIf="!filesURLs.length"
       class="app-button"

@@ -14,7 +14,7 @@ export class FilesUploadComponent implements OnInit {
 
   isHovering?: boolean;
   files: Array<File | null> = [];
-  imageFile = new File([], '');
+  imageFile: File | null = null;
   isError = false;
   filesURLs: string[] = [];
 
@@ -44,6 +44,15 @@ export class FilesUploadComponent implements OnInit {
         this.isError = true;
         return;
       }
+
+      if (this.data.crop && 
+          files.length === 1 && 
+          files.item(0).type.split('/')[0] === 'image'
+      ) {
+        this.imageFile = files.item(0);
+        return;
+      }
+
       for (let i = 0; i < files?.length; i++) {
         this.files.push(files.item(i));
       }
@@ -62,6 +71,11 @@ export class FilesUploadComponent implements OnInit {
   onComplete(): void {
     const res = this.data.multiple ? this.filesURLs : this.filesURLs[0];
     this.dialogRef.close(res);
+  }
+
+  onCrop(file: File): void {
+    this.imageFile = null;
+    this.files.push(file);
   }
 
 }

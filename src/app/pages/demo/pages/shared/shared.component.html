@@ -1,5 +1,5 @@
 <h2>Uploads</h2>
-<aa-button aaFilesUpload [crop]=true>Single Upload</aa-button>
+<aa-button aaFilesUpload [crop]=true (changed)="onFilesChanged($event)">Single Upload</aa-button>
 <aa-button 
   aaFilesUpload 
   [multiple]=true

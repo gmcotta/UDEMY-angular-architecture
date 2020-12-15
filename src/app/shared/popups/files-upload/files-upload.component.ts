@@ -30,7 +30,7 @@ export class FilesUploadComponent implements OnInit {
     this.isHovering = event;
   }
 
-  onDrop(files: any): void {
+  onDrop(files: FileList | null): void {
     
     // console.log(files);
     // const element = $event.target as HTMLInputElement;
@@ -47,7 +47,7 @@ export class FilesUploadComponent implements OnInit {
 
       if (this.data.crop && 
           files.length === 1 && 
-          files.item(0).type.split('/')[0] === 'image'
+          files.item(0)?.type.split('/')[0] === 'image'
       ) {
         this.imageFile = files.item(0);
         return;

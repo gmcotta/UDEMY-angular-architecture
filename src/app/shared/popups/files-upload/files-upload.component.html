@@ -19,10 +19,11 @@
           <label class="file">
             <!-- TODO: Ver um jeito de mudar o tipo do evento onDrop por aqui -->
             <input 
+              #fileInput
               class="file__input" 
               [multiple]="data.multiple"
               type="file"
-              (change)="onDrop($event.target?.files)"
+              (change)="onDrop(fileInput.files)"
             />
             <span class="file__label">choose</span>
           </label>

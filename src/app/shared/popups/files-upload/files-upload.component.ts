@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilesUploadComponent implements OnInit {
 
+  isHovering: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleHover(event: boolean) {
+    this.isHovering = event;
   }
 
 }

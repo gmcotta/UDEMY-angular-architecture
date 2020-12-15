@@ -36,4 +36,20 @@ export class StepperComponent implements OnInit {
   isLast(): boolean {
     return this.activeStep.index === this.steps.length - 1;
   }
+
+  onNext() {
+    this.stepper.onNext();
+  }
+
+  onComplete() {
+
+  }
+
+  onPrev() {
+    this.stepper.onPrev();
+  }
+
+  onCancel() {
+
+  }
 }

@@ -16,15 +16,20 @@ const routes: Routes = [
           .then(m => m.AuthModule),
       },
       {
+        path: 'static',
+        loadChildren: () => import('./pages/static/static.module')
+          .then(m => m.StaticModule),
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./pages/profile/profile.module')
+          .then(m => m.ProfileModule),
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: 'static/welcome',
       },
-      {
-        path: 'static',
-        loadChildren: () => import('./pages/static/static.module')
-          .then(m => m.StaticModule),
-      }
     ]
   },
   {

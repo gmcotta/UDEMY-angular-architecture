@@ -4,6 +4,12 @@
   </div>
 
   <div class="app-page__content">
-    
+    <aa-stepper>
+      <ng-container [ngSwitch]="stepper?.activeStep?.key">
+        <div *ngSwitchCase="'one'">One</div>
+        <div *ngSwitchCase="'two'">Two</div>
+        <div *ngSwitchCase="'three'">Three</div>
+      </ng-container>
+    </aa-stepper>
   </div>
 </div>

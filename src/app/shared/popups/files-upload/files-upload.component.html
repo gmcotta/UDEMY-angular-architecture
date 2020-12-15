@@ -13,7 +13,7 @@
         (hovered)="toggleHover($event)"
         (dropped)="onDrop($event)"
       >
-        <div class="dropzone__label">Drop files here or</div>
+        <span class="dropzone__label">Drop files here or</span>
 
         <div class="dropzone__file">
           <label class="file">
@@ -43,12 +43,11 @@
       </aa-upload>
     </ng-container>
 
-    <ng-container *ngIf="files">
-      <aa-upload
-        *ngFor="let file of files"
-        [file]="file"
-        (completed)="onUploadComplete($event)"
-      ></aa-upload>
+    <ng-container *ngIf="imageFile">
+      <aa-cropper
+        [imageFile]="imageFile"
+        (changed)="onCrop($event)"
+      ></aa-cropper>
     </ng-container>
   </div>
 

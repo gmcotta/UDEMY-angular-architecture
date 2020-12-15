@@ -4,32 +4,44 @@
   </div>
 
   <div class="files-upload__content">
-    <div 
-      aaDropZone
-      class="dropzone" 
-      [class.dropzone_hovered]="isHovering"
-      (hovered)="toggleHover($event)"
-      (dropped)="onDrop($event)"
-    >
-      <div class="dropzone__label">Drop files here or</div>
 
-      <div class="dropzone__file">
-        <label class="file">
-          <!-- TODO: Ver um jeito de mudar o tipo do evento onDrop por aqui -->
-          <input 
-            class="file__input" 
-            [multiple]="data.multiple"
-            type="file"
-            (change)="onDrop($event.target.files)"
-          />
-          <span class="file__label">choose</span>
-        </label>
-      </div>
+    <ng-container *ngIf="!files.length">
+      <div 
+        aaDropZone
+        class="dropzone" 
+        [class.dropzone_hovered]="isHovering"
+        (hovered)="toggleHover($event)"
+        (dropped)="onDrop($event)"
+      >
+        <div class="dropzone__label">Drop files here or</div>
 
-      <div class="error" *ngIf="isError">
-        Choose only one file
+        <div class="dropzone__file">
+          <label class="file">
+            <!-- TODO: Ver um jeito de mudar o tipo do evento onDrop por aqui -->
+            <input 
+              class="file__input" 
+              [multiple]="data.multiple"
+              type="file"
+              (change)="onDrop($event.target?.files)"
+            />
+            <span class="file__label">choose</span>
+          </label>
+        </div>
+
+        <div class="error" *ngIf="isError">
+          Choose only one file
+        </div>
       </div>
-    </div>
+    </ng-container>
+
+    <ng-container *ngIf="files">
+      <aa-upload 
+        *ngFor="let file of files" 
+        [file]="file" 
+        (completed)="onUploadComplete($event)"
+      >
+      </aa-upload>
+    </ng-container>
   </div>
 
   <div class="files-upload__footer">

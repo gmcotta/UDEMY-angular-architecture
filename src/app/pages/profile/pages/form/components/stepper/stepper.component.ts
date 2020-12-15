@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StepperService } from './services';
 
 @Component({
   selector: 'aa-stepper',
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StepperComponent implements OnInit {
 
-  constructor() { }
+  constructor(private stepper: StepperService) { }
 
   ngOnInit(): void {
   }
 
+  get steps() {
+    return this.stepper.steps;
+  }
+
+  get activeStep() {
+    return this.stepper.activeStep;
+  }
+
+  isActive(index: number): boolean {
+    return index === this.activeStep.index;
+  }
+
+  isCompleted(index: number): boolean {
+    return index < this.activeStep.index;
+  }
+
+  isFirst(): boolean {
+    return this.activeStep.index === 0;
+  }
+
+  isLast(): boolean {
+    return this.activeStep.index === this.steps.length - 1;
+  }
 }

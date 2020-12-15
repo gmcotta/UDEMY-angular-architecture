@@ -12,8 +12,7 @@ export interface DialogData {
 })
 export class FilesUploadComponent implements OnInit {
 
-  isHovering: boolean = false;
-
+  isHovering?: boolean;
   files: Array<File | null> = [];
   imageFile = new File([], '');
   isError = false;
@@ -31,23 +30,25 @@ export class FilesUploadComponent implements OnInit {
     this.isHovering = event;
   }
 
-  onDrop($event: Event): void {
-    const element = $event.target as HTMLInputElement;
-    const files = element.files;
+  onDrop(files: any): void {
+    
+    // console.log(files);
+    // const element = $event.target as HTMLInputElement;
+    // const files = element.files;
+
     this.isError = false;
+    this.files = [];
 
     if (files) {
       if (this.data.crop && files?.length > 1) {
         this.isError = true;
         return;
       }
-
       for (let i = 0; i < files?.length; i++) {
         this.files.push(files.item(i));
       }
-
     }
-
+    console.log(this.files);
   }
 
 }

@@ -9,16 +9,18 @@
       class="dropzone" 
       [class.dropzone_hovered]="isHovering"
       (hovered)="toggleHover($event)"
+      (dropped)="onDrop($event)"
     >
       <div class="dropzone__label">Drop files here or</div>
 
       <div class="dropzone__file">
         <label class="file">
+          <!-- TODO: Ver um jeito de mudar o tipo do evento onDrop por aqui -->
           <input 
             class="file__input" 
             [multiple]="data.multiple"
             type="file"
-            (change)="onDrop($event)"
+            (change)="onDrop($event.target.files)"
           />
           <span class="file__label">choose</span>
         </label>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { StepperService } from './services';
 
 @Component({
@@ -6,11 +8,21 @@ import { StepperService } from './services';
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.scss']
 })
-export class StepperComponent implements OnInit {
+export class StepperComponent implements OnInit, OnDestroy {
+
+  private destroy = new Subject<any>();
 
   constructor(private stepper: StepperService) { }
 
   ngOnInit(): void {
+    this.stepper.next$
+      .pipe(takeUntil(this.destroy))
+      .subscribe(() => this.stepper.onNext());
+  }
+
+  ngOnDestroy(): void {
+    this.destroy.next();
+    this.destroy.complete();
   }
 
   get steps() {
@@ -38,11 +50,11 @@ export class StepperComponent implements OnInit {
   }
 
   onNext() {
-    this.stepper.onNext();
+    this.stepper.check.next('next');
   }
 
   onComplete() {
-
+    this.stepper.check.next('complete');
   }
 
   onPrev() {

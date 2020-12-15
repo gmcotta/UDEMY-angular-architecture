@@ -1,6 +1,12 @@
 <h2>Uploads</h2>
 <aa-button aaFilesUpload>Single Upload</aa-button>
-<aa-button aaFilesUpload [multiple]=true>Multiple Uploads</aa-button>
+<aa-button 
+  aaFilesUpload 
+  [multiple]=true
+  (changed)="onFilesChanged($event)"
+>
+  Multiple Uploads
+</aa-button>
 
 <h2>Actions</h2>
 

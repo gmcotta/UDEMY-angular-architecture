@@ -4,7 +4,7 @@
   </div>
 
   <div class="app-page__content">
-    <aa-stepper>
+    <aa-stepper *ngIf="dicionariesIsReady$ | async">
       <ng-container [ngSwitch]="stepperService?.activeStep?.key">
         <aa-personal *ngSwitchCase="'personal'"></aa-personal>
         <aa-professional *ngSwitchCase="'professional'"></aa-professional>

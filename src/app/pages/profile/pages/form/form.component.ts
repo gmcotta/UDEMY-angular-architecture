@@ -1,22 +1,37 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { StepperService } from './components/stepper/services';
 
+import { StepperService } from './components/stepper/services';
+import * as fromDictionaries from '@app/store/dictionaries/';
+import * as fromRoot from '@app/store';
 @Component({
   selector: 'aa-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent implements OnInit, OnDestroy {
+
+  dictionaries$ = new Observable<fromDictionaries.Dictionaries | null>();
+  dicionariesIsReady$ = new Observable<boolean | null>();
 
   private destroy = new Subject<any>();
 
   constructor(
     public stepperService: StepperService,
+    public store: Store<fromRoot.State>,
   ) { }
 
   ngOnInit(): void {
+    this.dictionaries$ = this.store.pipe(
+      select(fromDictionaries.getDictionaries)
+    );
+    this.dicionariesIsReady$ = this.store.pipe(
+      select(fromDictionaries.getIsReady)
+    );
+
     this.stepperService.init([
       { key: 'personal', label: 'Personal' },
       { key: 'professional', label: 'Professional' },

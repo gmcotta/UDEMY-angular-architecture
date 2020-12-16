@@ -6,7 +6,14 @@ import { FormComponent } from './form.component';
 import { StepperModule } from './components/stepper/stepper.module';
 import { PersonalComponent } from './components/personal/personal.component';
 import { ProfessionalComponent } from './components/professional/professional.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { 
+  AutocompleteModule, 
+  FilesUploadModule, 
+  FormFieldModule, 
+  InputModule, 
+  SpinnerModule 
+} from '@app/shared';
 
 @NgModule({
   declarations: [
@@ -17,7 +24,13 @@ import { ProfessionalComponent } from './components/professional/professional.co
   imports: [
     CommonModule,
     FormRoutingModule,
+    ReactiveFormsModule,
     StepperModule,
+    FormFieldModule,
+    InputModule,
+    AutocompleteModule,
+    SpinnerModule,
+    FilesUploadModule,
   ],
 })
 export class FormModule { }

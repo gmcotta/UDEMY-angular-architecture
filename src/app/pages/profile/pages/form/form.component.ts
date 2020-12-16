@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { StepperService } from './components/stepper/services';
 import * as fromDictionaries from '@app/store/dictionaries/';
 import * as fromRoot from '@app/store';
+import { PersonalForm } from './components/personal/personal.component';
 @Component({
   selector: 'aa-form',
   templateUrl: './form.component.html',
@@ -53,6 +54,10 @@ export class FormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy.next();
     this.destroy.complete();
+  }
+
+  onChangedPersonal(data: PersonalForm): void {
+    console.log('personal changed:', data);
   }
 
 }

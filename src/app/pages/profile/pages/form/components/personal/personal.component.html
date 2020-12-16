@@ -1,1 +1,35 @@
-<p>personal works!</p>
+<form class="personal" [formGroup]="form" novalidate autocomplete="off">
+  <div class="personal__photo">
+    <div class="photo">
+      <div 
+        aaFilesUpload 
+        class="app-a" 
+        [crop]=true 
+        (changed)="onPhotoChanged($event)"
+      >
+        Upload photo
+      </div>
+    </div>
+  </div>
+  
+  <aa-form-field 
+    label="Name" 
+    [required]=true 
+    [control]="form.controls.name" 
+    [patternError]="patternError.latinAndSpaces"
+  >
+    <aa-input formControlName="name"></aa-input>
+  </aa-form-field>
+
+  <aa-form-field
+    label="Country" 
+    [required]=true 
+    [control]="form.controls.country" 
+  >
+    <aa-autocomplete 
+      formControlName="country" 
+      [items]="dictionaries!.countries.controlItems"
+    >
+    </aa-autocomplete>
+  </aa-form-field>
+</form>

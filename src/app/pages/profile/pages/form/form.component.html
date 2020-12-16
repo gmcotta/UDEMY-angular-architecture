@@ -6,7 +6,12 @@
   <div class="app-page__content">
     <aa-stepper *ngIf="dicionariesIsReady$ | async">
       <ng-container [ngSwitch]="stepperService?.activeStep?.key">
-        <aa-personal *ngSwitchCase="'personal'"></aa-personal>
+        <aa-personal 
+          *ngSwitchCase="'personal'"
+          [dictionaries]="dictionaries$ | async"
+          (changed)="onChangedPersonal($event)"
+        >
+        </aa-personal>
         <aa-professional *ngSwitchCase="'professional'"></aa-professional>
       </ng-container>
     </aa-stepper>

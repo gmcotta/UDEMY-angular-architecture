@@ -16,12 +16,16 @@ import {
   SpinnerModule, 
   UserPhotoModule
 } from '@app/shared';
+import { RecruiterComponent } from './components/professional/roles/recruiter/recruiter.component';
+import { EmployeeComponent } from './components/professional/roles/employee/employee.component';
 
 @NgModule({
   declarations: [
     FormComponent, 
     PersonalComponent, 
     ProfessionalComponent,
+    RecruiterComponent,
+    EmployeeComponent,
   ],
   imports: [
     CommonModule,

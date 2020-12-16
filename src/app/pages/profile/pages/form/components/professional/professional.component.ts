@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { markFormGroupTouched, regexErrorMessages } from '@app/shared';
-import { Dictionaries } from '@app/store/dictionaries';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
+
+import { markFormGroupTouched, regexErrorMessages } from '@app/shared';
+import { Dictionaries } from '@app/store/dictionaries';
 import { StepperService } from '../stepper/services';
+import { RecruiterForm } from './roles/recruiter/recruiter.component';
 
 export interface ProfessionalForm {
   about: string;
   roleId: string;
+  role: RecruiterForm;
 }
 
 @Component({

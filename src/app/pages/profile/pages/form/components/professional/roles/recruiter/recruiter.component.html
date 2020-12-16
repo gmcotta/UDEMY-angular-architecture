@@ -1,1 +1,17 @@
-<p>recruiter works!</p>
+<form [formGroup]="form" novalidate autocomplete="off">
+  <aa-form-field 
+    label="Company name" 
+    [control]="form.controls.companyName" 
+    [required]=true
+  >
+    <aa-input formControlName="companyName"></aa-input>
+  </aa-form-field>
+  
+  <aa-form-field 
+    label="Employees count" 
+    [control]="form.controls.employeesCount" 
+    [required]=true
+  >
+    <aa-input formControlName="employeesCount"></aa-input>
+  </aa-form-field>
+</form>

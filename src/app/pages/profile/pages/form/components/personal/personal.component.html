@@ -1,6 +1,7 @@
 <form class="personal" [formGroup]="form" novalidate autocomplete="off">
   <div class="personal__photo">
     <div class="photo">
+      <aa-user-photo [photoURL]="form.controls.photoURL.value"></aa-user-photo>
       <div 
         aaFilesUpload 
         class="app-a" 
@@ -10,6 +11,8 @@
         Upload photo
       </div>
     </div>
+
+    
   </div>
   
   <aa-form-field 

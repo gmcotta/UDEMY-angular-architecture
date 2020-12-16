@@ -12,7 +12,8 @@ import {
   FilesUploadModule, 
   FormFieldModule, 
   InputModule, 
-  SpinnerModule 
+  SpinnerModule, 
+  UserPhotoModule
 } from '@app/shared';
 
 @NgModule({
@@ -31,6 +32,7 @@ import {
     AutocompleteModule,
     SpinnerModule,
     FilesUploadModule,
+    UserPhotoModule,
   ],
 })
 export class FormModule { }

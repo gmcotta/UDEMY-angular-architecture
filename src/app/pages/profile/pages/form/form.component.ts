@@ -13,22 +13,22 @@ export class FormComponent implements OnInit, OnDestroy {
   private destroy = new Subject<any>();
 
   constructor(
-    public stepper: StepperService,
+    public stepperService: StepperService,
   ) { }
 
   ngOnInit(): void {
-    this.stepper.init([
+    this.stepperService.init([
       { key: 'personal', label: 'Personal' },
       { key: 'professional', label: 'Professional' },
     ]);
 
-    this.stepper.complete$
+    this.stepperService.complete$
       .pipe(takeUntil(this.destroy))
       .subscribe(() => {
         console.log('stepper completed');
       });
 
-    this.stepper.cancel$
+    this.stepperService.cancel$
       .pipe(takeUntil(this.destroy))
       .subscribe(() => {
         console.log('stepper canceled');

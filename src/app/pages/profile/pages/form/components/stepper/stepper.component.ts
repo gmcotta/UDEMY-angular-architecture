@@ -12,12 +12,12 @@ export class StepperComponent implements OnInit, OnDestroy {
 
   private destroy = new Subject<any>();
 
-  constructor(private stepper: StepperService) { }
+  constructor(private stepperService: StepperService) { }
 
   ngOnInit(): void {
-    this.stepper.next$
+    this.stepperService.nextStep$
       .pipe(takeUntil(this.destroy))
-      .subscribe(() => this.stepper.onNext());
+      .subscribe(() => this.stepperService.onNext());
   }
 
   ngOnDestroy(): void {
@@ -26,11 +26,11 @@ export class StepperComponent implements OnInit, OnDestroy {
   }
 
   get steps() {
-    return this.stepper.steps;
+    return this.stepperService.steps;
   }
 
   get activeStep() {
-    return this.stepper.activeStep;
+    return this.stepperService.activeStep;
   }
 
   isActive(index: number): boolean {
@@ -49,19 +49,25 @@ export class StepperComponent implements OnInit, OnDestroy {
     return this.activeStep.index === this.steps.length - 1;
   }
 
-  onNext() {
-    this.stepper.check.next('next');
-  }
-
-  onComplete() {
-    this.stepper.check.next('complete');
+  onCancel() {
+    console.log('stepper oncancel');
+    this.stepperService.cancel.next();
   }
 
   onPrev() {
-    this.stepper.onPrev();
+    console.log('stepper onprev');
+    this.stepperService.onPrev();
   }
 
-  onCancel() {
-    this.stepper.cancel.next();
+  onNext() {
+    console.log('stepper onnext');
+    this.stepperService.check.next('nextStep');
   }
+
+  onComplete() {
+    console.log('stepper oncomplete');
+    this.stepperService.check.next('complete');
+  }
+
+
 }

@@ -17,11 +17,11 @@ export class StepperService {
   steps: Step[] = [];
   activeStep: ActiveStep = {} as ActiveStep;
 
-  next = new Subject<boolean>();
-  next$ = new Observable<boolean>();
+  nextStep = new Subject<boolean>();
+  nextStep$ = new Observable<boolean>();
 
-  // prev = new Subject<void>();
-  // prev$ = this.prev.asObservable();
+  prevStep = new Subject<void>();
+  prevStep$ = this.prevStep.asObservable();
 
   complete = new Subject<boolean>();
   complete$ = new Observable<boolean>();
@@ -29,11 +29,11 @@ export class StepperService {
   cancel = new Subject<void>();
   cancel$ = this.cancel.asObservable();
 
-  check = new Subject<'next' | 'complete'>();
+  check = new Subject<'nextStep' | 'complete'>();
   check$ = this.check.asObservable();
 
   constructor() { 
-    this.next$ = this.next.asObservable().pipe(filter(isOk => isOk));
+    this.nextStep$ = this.nextStep.asObservable().pipe(filter(isOk => isOk));
     this.complete$ = this.complete.asObservable().pipe(filter(isOk => isOk));
   }
 

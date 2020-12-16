@@ -5,7 +5,7 @@
 
   <div class="app-page__content">
     <aa-stepper>
-      <ng-container [ngSwitch]="stepper?.activeStep?.key">
+      <ng-container [ngSwitch]="stepperService?.activeStep?.key">
         <aa-personal *ngSwitchCase="'personal'"></aa-personal>
         <aa-professional *ngSwitchCase="'professional'"></aa-professional>
       </ng-container>

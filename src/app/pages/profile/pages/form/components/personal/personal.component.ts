@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { StepperService } from '../stepper/services';
 
 @Component({
@@ -13,13 +13,13 @@ export class PersonalComponent implements OnInit, OnDestroy {
   private destroy = new Subject<any>();
 
   constructor(
-    private stepper: StepperService,
+    private stepperService: StepperService,
   ) { }
 
   ngOnInit(): void {
-    this.stepper.check$
-      .pipe(takeUntil(this.destroy))
-      .subscribe(type => this.stepper[type].next(true));
+    this.stepperService.check$
+      .pipe(takeUntil(this.destroy), tap(() => console.log('observable check - personal')))
+      .subscribe(type => this.stepperService[type].next(true));
   }
 
   ngOnDestroy(): void {

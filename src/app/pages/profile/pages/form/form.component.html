@@ -12,7 +12,12 @@
           (changed)="onChangedPersonal($event)"
         >
         </aa-personal>
-        <aa-professional *ngSwitchCase="'professional'"></aa-professional>
+        <aa-professional 
+          *ngSwitchCase="'professional'" 
+          [dictionaries]="dictionaries$ | async"
+          (changed)="onChangedProfessional($event)"
+        >
+        </aa-professional>
       </ng-container>
     </aa-stepper>
   </div>

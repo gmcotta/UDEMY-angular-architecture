@@ -12,6 +12,7 @@ import {
   FilesUploadModule, 
   FormFieldModule, 
   InputModule, 
+  RadiosModule, 
   SpinnerModule, 
   UserPhotoModule
 } from '@app/shared';
@@ -33,6 +34,7 @@ import {
     SpinnerModule,
     FilesUploadModule,
     UserPhotoModule,
+    RadiosModule,
   ],
 })
 export class FormModule { }

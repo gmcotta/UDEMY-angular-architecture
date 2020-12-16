@@ -1,1 +1,12 @@
-<p>professional works!</p>
+<form [formGroup]="form" novalidate autocomplete="off">
+  <aa-form-field label="Role" [required]=true [control]="form.controls.roleId">
+    <aa-radios 
+      formControlName="roleId" 
+      [items]="dictionaries?.roles!.controlItems"
+    ></aa-radios>
+  </aa-form-field>
+
+  <aa-form-field label="Tell about yourself" [control]="form.controls.about">
+    <aa-input formControlName="about"></aa-input>
+  </aa-form-field>
+</form>

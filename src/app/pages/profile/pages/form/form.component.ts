@@ -7,6 +7,7 @@ import { StepperService } from './components/stepper/services';
 import * as fromDictionaries from '@app/store/dictionaries/';
 import * as fromRoot from '@app/store';
 import { PersonalForm } from './components/personal/personal.component';
+import { ProfessionalForm } from './components/professional/professional.component';
 @Component({
   selector: 'aa-form',
   templateUrl: './form.component.html',
@@ -34,8 +35,8 @@ export class FormComponent implements OnInit, OnDestroy {
     );
 
     this.stepperService.init([
-      { key: 'personal', label: 'Personal' },
       { key: 'professional', label: 'Professional' },
+      { key: 'personal', label: 'Personal' },
     ]);
 
     this.stepperService.complete$
@@ -59,5 +60,11 @@ export class FormComponent implements OnInit, OnDestroy {
   onChangedPersonal(data: PersonalForm): void {
     console.log('personal changed:', data);
   }
+  
+  onChangedProfessional(data: ProfessionalForm | null): void {
+    console.log('professional changed:', data);
+  }
+
+
 
 }

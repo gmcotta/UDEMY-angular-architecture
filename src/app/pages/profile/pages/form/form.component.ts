@@ -16,8 +16,8 @@ import { ProfessionalForm } from './components/professional/professional.compone
 })
 export class FormComponent implements OnInit, OnDestroy {
 
-  dictionaries$ = new Observable<fromDictionaries.Dictionaries | null>();
-  dicionariesIsReady$ = new Observable<boolean | null>();
+  dictionaries$ = new Observable<fromDictionaries.Dictionaries>();
+  dicionariesIsReady$ = new Observable<boolean>();
 
   private destroy = new Subject<any>();
 

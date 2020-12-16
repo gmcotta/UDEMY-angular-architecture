@@ -2,15 +2,15 @@ import { Dictionaries } from './dictionaries.models';
 import * as fromActions from './dictionaries.actions';
 
 export interface DictionariesState {
-  entities: Dictionaries | null;
-  loading: boolean | null;
-  error: string | null;
+  entities: Dictionaries;
+  loading: boolean;
+  error: string;
 }
 
 const initialState: DictionariesState = {
-  entities: null,
-  loading: null,
-  error: null,
+  entities: {} as Dictionaries,
+  loading: false,
+  error: '',
 };
 
 export function reducer(
@@ -19,11 +19,11 @@ export function reducer(
 ): DictionariesState {
   switch (action.type) {
     case fromActions.Types.READ: {
-      return { ...state, loading: true, error: null };
+      return { ...state, loading: true, error: '' };
     }
     case fromActions.Types.READ_SUCCESS: {
       const entities = action.dictionaries;
-      return { ...state, loading: false, error: null, entities };
+      return { ...state, loading: false, error: '', entities };
     }
     case fromActions.Types.READ_ERROR: {
       const error = action.error;

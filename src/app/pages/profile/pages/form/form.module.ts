@@ -9,10 +9,12 @@ import { ProfessionalComponent } from './components/professional/professional.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { 
   AutocompleteModule, 
+  CheckboxesModule, 
   FilesUploadModule, 
   FormFieldModule, 
   InputModule, 
   RadiosModule, 
+  SelectModule, 
   SpinnerModule, 
   UserPhotoModule
 } from '@app/shared';
@@ -39,6 +41,8 @@ import { EmployeeComponent } from './components/professional/roles/employee/empl
     FilesUploadModule,
     UserPhotoModule,
     RadiosModule,
+    SelectModule,
+    CheckboxesModule,
   ],
 })
 export class FormModule { }

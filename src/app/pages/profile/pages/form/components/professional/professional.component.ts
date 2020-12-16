@@ -7,11 +7,12 @@ import { markFormGroupTouched, regexErrorMessages } from '@app/shared';
 import { Dictionaries } from '@app/store/dictionaries';
 import { StepperService } from '../stepper/services';
 import { RecruiterForm } from './roles/recruiter/recruiter.component';
+import { EmployeeForm } from './roles/employee/employee.component';
 
 export interface ProfessionalForm {
   about: string;
   roleId: string;
-  role: RecruiterForm;
+  role: RecruiterForm | EmployeeForm;
 }
 
 @Component({
@@ -23,13 +24,13 @@ export interface ProfessionalForm {
 export class ProfessionalComponent implements OnInit, OnDestroy {
 
   @Input() value: ProfessionalForm = {} as ProfessionalForm;
-  @Input() dictionaries: Dictionaries | null = null;
+  @Input() dictionaries: Dictionaries | null = {} as Dictionaries;
 
-  @Output() changed = new EventEmitter<ProfessionalForm | null>();
+  @Output() changed = new EventEmitter<ProfessionalForm>();
 
   form = new FormGroup({});
   regexErrors = regexErrorMessages;
-  private destroy = new Subject<any>();
+  private destroy = new Subject<any>(); 
 
   constructor(
     private stepperService: StepperService,
@@ -39,18 +40,13 @@ export class ProfessionalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
+      about: [],
       roleId: [null, {
         updateOn: 'change',
         validators: [
           Validators.required,
         ]
       }],
-      about: [null, {
-        updateOn: 'blur',
-        validators: [
-          Validators.required,
-        ]
-      }]
     });
 
     if (this.value) {

@@ -1,1 +1,42 @@
-<p>employee works!</p>
+<form [formGroup]="form" novalidate autocomplete="off">
+  <aa-form-field 
+    label="Expected Salary" 
+    [required]=true 
+    [control]="form.controls.expectedSalary"
+  >
+    <aa-input formControlName="expectedSalary"></aa-input>
+  </aa-form-field>
+  <aa-form-field 
+    label="Specialization" 
+    [required]=true 
+    [control]="form.controls.specialization"
+  >
+    <aa-select 
+      formControlName="specialization" 
+      [items]="dictionaries!.specializations!.controlItems"
+    >
+    </aa-select>
+  </aa-form-field>
+  <aa-form-field 
+    label="Qualification" 
+    [required]=true 
+    [control]="form.controls.qualification"
+  >
+    <aa-select 
+      formControlName="qualification" 
+      [items]="dictionaries!.qualifications!.controlItems"
+    >
+    </aa-select>
+  </aa-form-field>
+  <aa-form-field 
+    label="Skills" 
+    [required]=true 
+    [control]="form.controls.skills"
+  >
+    <aa-checkboxes 
+      formControlName="skills" 
+      [items]="dictionaries!.skills!.controlItems"
+    >
+    </aa-checkboxes>
+  </aa-form-field>
+</form>

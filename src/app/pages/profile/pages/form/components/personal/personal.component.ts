@@ -21,7 +21,7 @@ export interface PersonalForm {
 export class PersonalComponent implements OnInit, OnDestroy {
 
   @Input() value: PersonalForm = {} as PersonalForm;
-  @Input () dictionaries: Dictionaries | null = null;
+  @Input () dictionaries: Dictionaries | null = {} as Dictionaries;
 
   @Output() changed = new EventEmitter<PersonalForm>();
 

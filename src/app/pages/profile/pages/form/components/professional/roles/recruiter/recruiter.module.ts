@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RecuiterComponent } from './recuiter.component';
+import { RecruiterComponent } from './recruiter.component';
 
 
 
 @NgModule({
-  declarations: [RecuiterComponent],
+  declarations: [RecruiterComponent],
   imports: [
     CommonModule
   ]
 })
-export class RecuiterModule { }
+export class RecruiterModule { }

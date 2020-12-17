@@ -112,6 +112,52 @@ export function reducer(
         error: action.error,
       };
     };
+
+    case fromActions.Types.CREATE: {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    };
+    case fromActions.Types.CREATE_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        entity: action.user,
+      };
+    };
+    case fromActions.Types.CREATE_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    };
+    
+    case fromActions.Types.UPDATE: {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    };
+    case fromActions.Types.UPDATE_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        entity: action.user,
+      };
+    };
+    case fromActions.Types.UPDATE_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    };
     
     default: return { ...state };
   }

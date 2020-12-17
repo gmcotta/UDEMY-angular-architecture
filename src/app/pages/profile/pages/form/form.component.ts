@@ -8,6 +8,12 @@ import * as fromDictionaries from '@app/store/dictionaries/';
 import * as fromRoot from '@app/store';
 import { PersonalForm } from './components/personal/personal.component';
 import { ProfessionalForm } from './components/professional/professional.component';
+
+export interface ProfileForm {
+  personal: PersonalForm | null;
+  professional: ProfessionalForm | null;
+}
+
 @Component({
   selector: 'aa-form',
   templateUrl: './form.component.html',

@@ -22,7 +22,8 @@
   >
     <aa-select 
       formControlName="specialization" 
-      [items]="dictionaries!.specializations!.controlItems"
+      [items]="controls.specialization.items"
+      (changed)="controls.specialization.changed()"
     >
     </aa-select>
   </aa-form-field>
@@ -33,7 +34,7 @@
   >
     <aa-select 
       formControlName="qualification" 
-      [items]="dictionaries!.qualifications!.controlItems"
+      [items]="controls.qualification.items"
     >
     </aa-select>
   </aa-form-field>
@@ -44,7 +45,7 @@
   >
     <aa-checkboxes 
       formControlName="skills" 
-      [items]="dictionaries!.skills!.controlItems"
+      [items]="controls.skills.items"
     >
     </aa-checkboxes>
   </aa-form-field>

@@ -12,7 +12,7 @@ export const markFormGroupTouched = (formGroup: FormGroup) => {
 }
 
 export interface Control {
-  items?: ControlItem[];
+  items: ControlItem[];
   changed: () => void;
   // TODO: change it to optional
   map: () => void;

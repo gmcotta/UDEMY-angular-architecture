@@ -1,0 +1,38 @@
+<form [formGroup]="parent" class="experiences">
+  <div [formArrayName]="name" *ngIf="parent.controls.experiences">
+    <div class="experience"
+      *ngFor="let experience of form.controls; 
+              let index = index; 
+              let first = first"
+    >
+      <div [formGroupName]="index">
+        <aa-form-field 
+          label="Company name" 
+          [required]=true 
+          [isInline]=false 
+          [control]="getNestedGroupForm(index).controls.companyName"
+        >
+          <aa-input formControlName="companyName"></aa-input>
+        </aa-form-field>
+        <aa-form-field
+          label="Period" 
+          [required]=true 
+          [isInline]=false 
+          [control]="getNestedGroupForm(index).controls.period"
+        >
+          <aa-date-range formControlName="period"></aa-date-range>
+        </aa-form-field>
+      </div>
+
+      <div class="experience__footer">
+        <aa-button *ngIf="!first" (click)="deleteExperience(index)">
+          Delete
+        </aa-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="experiences__footer">
+    <aa-button (click)="addExperience()">Add</aa-button>
+  </div>
+</form>

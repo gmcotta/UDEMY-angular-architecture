@@ -12,7 +12,7 @@ import { EmployeeForm } from './roles/employee/employee.component';
 export interface ProfessionalForm {
   about: string;
   roleId: string;
-  role: RecruiterForm | EmployeeForm;
+  role: RecruiterForm | EmployeeForm | undefined;
 }
 
 @Component({
@@ -23,7 +23,7 @@ export interface ProfessionalForm {
 })
 export class ProfessionalComponent implements OnInit, OnDestroy {
 
-  @Input() value: ProfessionalForm = {} as ProfessionalForm;
+  @Input() value?: ProfessionalForm;
   @Input() dictionaries: Dictionaries | null = {} as Dictionaries;
 
   @Output() changed = new EventEmitter<ProfessionalForm>();

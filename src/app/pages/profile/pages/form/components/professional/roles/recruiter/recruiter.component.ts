@@ -16,7 +16,7 @@ export class RecruiterComponent implements OnInit, OnDestroy {
 
   @Input() parent = new FormGroup({});
   @Input() name: string = '';
-  @Input() value?: RecruiterForm | EmployeeForm;
+  @Input() value?: RecruiterForm;
   @Input() dictionaries: Dictionaries | null = {} as Dictionaries;
 
   form = new FormGroup({});

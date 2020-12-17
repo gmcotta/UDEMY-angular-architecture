@@ -6,6 +6,15 @@
   >
     <aa-input formControlName="expectedSalary"></aa-input>
   </aa-form-field>
+
+  <aa-form-field label="Experience" [required]=true>
+    <aa-experiences 
+      [parent]="form" 
+      name="experiences"
+    >
+    </aa-experiences>
+  </aa-form-field>
+
   <aa-form-field 
     label="Specialization" 
     [required]=true 
@@ -39,4 +48,6 @@
     >
     </aa-checkboxes>
   </aa-form-field>
+
+
 </form>

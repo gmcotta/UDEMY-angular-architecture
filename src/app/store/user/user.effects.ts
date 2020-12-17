@@ -45,7 +45,7 @@ export class UserEffects {
             map(user => {
               return new fromActions.InitAuthorized(
                 authState.uid, 
-                user || null
+                user!
               );
             })
           );
@@ -100,7 +100,7 @@ export class UserEffects {
               tap(() => this.router.navigate(['/'])),
               map(user => new fromActions.SignInEmailSuccess(
                 signInState.user?.uid, 
-                user || null
+                user
               ))
             )
         }),

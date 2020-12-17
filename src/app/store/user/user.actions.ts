@@ -36,7 +36,7 @@ export class Init implements Action {
 }
 export class InitAuthorized implements Action {
   readonly type = Types.INIT_AUTHORIZED;
-  constructor(public uid: string, public user: User | null) {}
+  constructor(public uid: string, public user: User) {}
 }
 export class InitUnauthorized implements Action {
   readonly type = Types.INIT_UNAUTHORIZED;
@@ -53,7 +53,7 @@ export class SignInEmail implements Action {
 }
 export class SignInEmailSuccess implements Action {
   readonly type = Types.SIGN_IN_EMAIL_SUCCESS;
-  constructor(public uid: string | undefined, public user: User | null) {}
+  constructor(public uid: string | undefined, public user: User | undefined) {}
 }
 export class SignInEmailError implements Action {
   readonly type = Types.SIGN_IN_EMAIL_ERROR;

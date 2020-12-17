@@ -3,14 +3,14 @@ import * as fromActions from './user.actions';
 import {} from './user.models';
 
 export interface UserState {
-  entity: User | null;
+  entity: User | undefined;
   uid: string | undefined | null;
   loading: boolean | null;
   error: string | null;
 }
 
 const initialState: UserState = {
-  entity: null,
+  entity: {} as User,
   uid: null,
   loading: null,
   error: null,
@@ -39,7 +39,7 @@ export function reducer(
       return {
         ...state,
         loading: false,
-        entity: null,
+        entity: {} as User,
         error: null,
       };
     };

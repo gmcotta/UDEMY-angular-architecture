@@ -8,7 +8,8 @@ import * as fromDictionaries from '@app/store/dictionaries/';
 import * as fromRoot from '@app/store';
 import { PersonalForm } from './components/personal/personal.component';
 import { ProfessionalForm } from './components/professional/professional.component';
-
+import * as fromUser from '@app/store/user';
+import { ActivatedRoute } from '@angular/router';
 export interface ProfileForm {
   personal: PersonalForm | null;
   professional: ProfessionalForm | null;
@@ -27,12 +28,17 @@ export class FormComponent implements OnInit, OnDestroy {
 
   private destroy = new Subject<any>();
 
+  private user?: fromUser.User;
+
   constructor(
     public stepperService: StepperService,
     public store: Store<fromRoot.State>,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.user = this.activatedRoute.snapshot.data['user'];
+
     this.dictionaries$ = this.store.pipe(
       select(fromDictionaries.getDictionaries)
     );

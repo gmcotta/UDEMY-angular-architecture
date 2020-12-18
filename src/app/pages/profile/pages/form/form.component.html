@@ -9,12 +9,14 @@
         <aa-personal 
           *ngSwitchCase="'personal'"
           [dictionaries]="dictionaries$ | async"
+          [value]="personal$ | async"
           (changed)="onChangedPersonal($event)"
         >
         </aa-personal>
         <aa-professional 
           *ngSwitchCase="'professional'" 
           [dictionaries]="dictionaries$ | async"
+          [value]="professional$ | async"
           (changed)="onChangedProfessional($event)"
         >
         </aa-professional>

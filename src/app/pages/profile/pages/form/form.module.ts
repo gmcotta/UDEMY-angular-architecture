@@ -23,6 +23,7 @@ import {
 import { RecruiterComponent } from './components/professional/roles/recruiter/recruiter.component';
 import { EmployeeComponent } from './components/professional/roles/employee/employee.component';
 import { ExperiencesComponent } from './components/professional/roles/employee/experiences/experiences.component';
+import { MapperService } from './services';
 
 @NgModule({
   declarations: [
@@ -50,5 +51,8 @@ import { ExperiencesComponent } from './components/professional/roles/employee/e
     DateRangeModule,
     ButtonModule,
   ],
+  providers: [
+    MapperService,
+  ]
 })
 export class FormModule { }

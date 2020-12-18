@@ -1,15 +1,19 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject, zip } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 import { StepperService } from './components/stepper/services';
+import { MapperService } from './services';
+
 import * as fromDictionaries from '@app/store/dictionaries/';
 import * as fromRoot from '@app/store';
+import * as fromUser from '@app/store/user';
+import * as fromForm from '../../store/form';
+
 import { PersonalForm } from './components/personal/personal.component';
 import { ProfessionalForm } from './components/professional/professional.component';
-import * as fromUser from '@app/store/user';
-import { ActivatedRoute } from '@angular/router';
 
 export interface ProfileForm {
   personal: PersonalForm;
@@ -27,18 +31,24 @@ export class FormComponent implements OnInit, OnDestroy {
   dictionaries$ = new Observable<fromDictionaries.Dictionaries>();
   dicionariesIsReady$ = new Observable<boolean>();
 
-  private destroy = new Subject<any>();
+  personal$ = new Observable<PersonalForm>();
+  professional$ = new Observable<ProfessionalForm>();
 
+  private profile$ = new Observable<ProfileForm>();
+  private isEditing = false;
   private user?: fromUser.User;
+  private destroy = new Subject<any>();
 
   constructor(
     public stepperService: StepperService,
     public store: Store<fromRoot.State>,
     private activatedRoute: ActivatedRoute,
+    private mapperService: MapperService,
   ) { }
 
   ngOnInit(): void {
     this.user = this.activatedRoute.snapshot.data['user'];
+    this.isEditing = !!this.user;
 
     this.dictionaries$ = this.store.pipe(
       select(fromDictionaries.getDictionaries)
@@ -47,15 +57,33 @@ export class FormComponent implements OnInit, OnDestroy {
       select(fromDictionaries.getIsReady)
     );
 
+    this.personal$ = this.store.pipe(
+      select(fromForm.getPersonalForm)
+    );
+    this.professional$ = this.store.pipe(
+      select(fromForm.getProfessionalForm)
+    );
+    this.profile$ = this.store.pipe(
+      select(fromForm.getFormState)
+    );
+
+    if (this.user) {
+      const form = this.mapperService.userToForm(this.user);
+      this.store.dispatch(new fromForm.Set(form));
+    }
+
     this.stepperService.init([
-      { key: 'professional', label: 'Professional' },
       { key: 'personal', label: 'Personal' },
+      { key: 'professional', label: 'Professional' },
     ]);
 
-    this.stepperService.complete$
-      .pipe(takeUntil(this.destroy))
-      .subscribe(() => {
-        console.log('stepper completed');
+    this.stepperService.complete$.pipe(
+      switchMap(() => zip(this.profile$, this.dictionaries$)),
+      takeUntil(this.destroy)
+    ).subscribe(([profile, dictionaries]) => {
+        if (this.user) {
+          this.onComplete(profile, this.user, dictionaries);
+        }
       });
 
     this.stepperService.cancel$
@@ -71,13 +99,26 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   onChangedPersonal(data: PersonalForm): void {
-    console.log('personal changed:', data);
+    this.store.dispatch(new fromForm.Update({ personal: data }))
   }
   
-  onChangedProfessional(data: ProfessionalForm | null): void {
-    console.log('professional changed:', data);
+  onChangedProfessional(data: ProfessionalForm): void {
+    this.store.dispatch(new fromForm.Update({ professional: data }))
   }
 
-
+  private onComplete(
+    profile: ProfileForm, 
+    user: fromUser.User, 
+    dictionaries: fromDictionaries.Dictionaries
+  ): void {
+    if (this.isEditing) {
+      const request = this.mapperService
+        .formToUserUpdate(profile, user, dictionaries);
+      this.store.dispatch(new fromUser.Update(request));
+    } else {
+      const request = this.mapperService
+        .formToUserCreate(profile, dictionaries);
+    }
+  }
 
 }

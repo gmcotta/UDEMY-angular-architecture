@@ -10,7 +10,7 @@ import { RecruiterForm } from './roles/recruiter/recruiter.component';
 import { EmployeeForm } from './roles/employee/employee.component';
 
 export interface ProfessionalForm {
-  about: string;
+  about: string | undefined;
   roleId: string;
   role: RecruiterForm | EmployeeForm | undefined;
 }

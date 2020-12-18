@@ -10,9 +10,10 @@ import { PersonalForm } from './components/personal/personal.component';
 import { ProfessionalForm } from './components/professional/professional.component';
 import * as fromUser from '@app/store/user';
 import { ActivatedRoute } from '@angular/router';
+
 export interface ProfileForm {
-  personal: PersonalForm | null;
-  professional: ProfessionalForm | null;
+  personal: PersonalForm;
+  professional: ProfessionalForm;
 }
 
 @Component({

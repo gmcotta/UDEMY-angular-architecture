@@ -4,14 +4,14 @@ import { Employee, Recruiter } from './roles';
 
 export * from './roles';
 export interface User {
-  uid: string | undefined;
+  uid: string;
   name: string;
   photoURL: string;
-  email: string | null | undefined;
+  email: string;
   country: string;
   about?: string;
   roleId: string;
-  role: Employee | Recruiter;
+  role: Employee | Recruiter | undefined;
   created: firebase.firestore.FieldValue;
   updated?: firebase.firestore.FieldValue;
 }

@@ -6,9 +6,9 @@ import { RecruiterForm } from '../recruiter/recruiter.component';
 import { ExperienceForm } from './experiences/experiences.component';
 
 export interface EmployeeForm {
-  specialization: string;
-  skills: string[];
-  qualification: string;
+  specialization: string | undefined;
+  skills: (string | undefined)[];
+  qualification: string | undefined;
   expectedSalary: number;
   experiences: ExperienceForm[];
 }

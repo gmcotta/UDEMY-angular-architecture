@@ -1,9 +1,9 @@
 export interface Employee {
-  specialization: Specialization;
-  skills: Skill[];
-  qualification: Qualification;
+  specialization: Specialization | undefined;
+  skills: (Skill | undefined)[];
+  qualification: Qualification | undefined;
   expectedSalary: number;
-  experiences: Experience[];
+  experiences: (Experience)[];
 }
 
 interface Specialization {

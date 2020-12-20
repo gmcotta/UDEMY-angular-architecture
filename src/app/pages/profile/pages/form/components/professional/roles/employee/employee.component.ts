@@ -5,7 +5,7 @@ import { Dictionaries } from '@app/store/dictionaries';
 import { RecruiterForm } from '../recruiter/recruiter.component';
 import { ExperienceForm } from './experiences/experiences.component';
 
-export interface EmployeeForm {
+export type EmployeeForm = {
   specialization: string | undefined;
   skills: (string | undefined)[];
   qualification: string | undefined;
@@ -22,7 +22,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   @Input() parent = new FormGroup({});
   @Input() name = '';
-  @Input() value?: EmployeeForm;
+  @Input() value?: EmployeeForm | RecruiterForm | undefined;
   @Input() dictionaries: Dictionaries | null = {} as Dictionaries;
 
   form = new FormGroup({});
@@ -115,5 +115,12 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.parent.removeControl(this.name);
   }
 
-
+  get experiences() {
+    const employeeValue = this.value as EmployeeForm;
+    if (employeeValue === undefined) {
+      return [];
+    } else {
+      return employeeValue.experiences;
+    }
+  }
 }

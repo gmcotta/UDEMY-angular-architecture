@@ -37,11 +37,11 @@ export class MapperService {
     }
   }
 
-  formToUserUpdate(form: ProfileForm, user: User, dictionaries: Dictionaries): User {
+  formToUserUpdate(form: ProfileForm, user: User | undefined, dictionaries: Dictionaries): User {
     return {
-      uid: user.uid,
-      email: user.email,
-      created: user.created,
+      uid: user!.uid,
+      email: user!.email,
+      created: user!.created,
       name: form.personal.name,
       photoURL: form.personal.photoURL,
       country: form.personal.country,

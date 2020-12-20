@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject, zip } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -43,11 +43,13 @@ export class FormComponent implements OnInit, OnDestroy {
     public stepperService: StepperService,
     public store: Store<fromRoot.State>,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private mapperService: MapperService,
   ) { }
 
   ngOnInit(): void {
-    this.user = this.activatedRoute.snapshot.data['user'];
+    console.log('on init form');
+    this.user = this.activatedRoute.snapshot.data.user;
     this.isEditing = !!this.user;
 
     this.dictionaries$ = this.store.pipe(
@@ -81,9 +83,9 @@ export class FormComponent implements OnInit, OnDestroy {
       switchMap(() => zip(this.profile$, this.dictionaries$)),
       takeUntil(this.destroy)
     ).subscribe(([profile, dictionaries]) => {
-        if (this.user) {
-          this.onComplete(profile, this.user, dictionaries);
-        }
+        console.log('estou prestes a completar', this.user);
+        this.onComplete(profile, this.user, dictionaries);
+
       });
 
     this.stepperService.cancel$
@@ -108,16 +110,19 @@ export class FormComponent implements OnInit, OnDestroy {
 
   private onComplete(
     profile: ProfileForm, 
-    user: fromUser.User, 
+    user: fromUser.User | undefined, 
     dictionaries: fromDictionaries.Dictionaries
   ): void {
     if (this.isEditing) {
+      console.log('estou editando');
       const request = this.mapperService
         .formToUserUpdate(profile, user, dictionaries);
       this.store.dispatch(new fromUser.Update(request));
     } else {
+      console.log('estou criando');
       const request = this.mapperService
         .formToUserCreate(profile, dictionaries);
+      this.store.dispatch(new fromUser.Create(request));
     }
   }
 

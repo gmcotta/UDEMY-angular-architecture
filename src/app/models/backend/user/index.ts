@@ -7,7 +7,7 @@ export interface User {
   uid: string;
   name: string;
   photoURL: string;
-  email: string;
+  email: string | null;
   country: string;
   about?: string;
   roleId: string;

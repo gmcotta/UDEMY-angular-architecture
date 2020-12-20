@@ -1,26 +1,25 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
 import * as fromUser from '@app/store/user';
 import * as fromRoot from '@app/store';
-import { filter, take } from 'rxjs/operators';
 
 @Injectable()
 export class UserResolver implements Resolve<fromUser.User | undefined> {
   
   constructor(private store: Store<fromRoot.State>) {}
   
-  resolve(
-    route: ActivatedRouteSnapshot, 
-    state: RouterStateSnapshot
-  ): fromUser.User | Observable<fromUser.User | undefined> | Promise<fromUser.User> {
+  resolve(): Observable<fromUser.User | undefined> {
     return this.store.pipe(
       select(fromUser.getUser),
-      filter(user => !!user),
+      filter(user => {
+        console.log('user resolver', user, !!user);
+        return !!user;
+      }),
       take(1)
     );
   }
-
 }

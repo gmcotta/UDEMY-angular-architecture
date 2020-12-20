@@ -43,6 +43,7 @@ export class UserEffects {
           .pipe(
             take(1),
             map(user => {
+              console.log('init authorized', user);
               return new fromActions.InitAuthorized(
                 authState.uid, 
                 user!
@@ -116,6 +117,7 @@ export class UserEffects {
   signOut: Observable<Action> = this.actions.pipe(
     ofType(fromActions.Types.SIGN_OUT),
     switchMap(() => from(this.afAuth.signOut()).pipe(
+      tap(() => this.router.navigate(['/'])),
       map(() => new fromActions.SignOutSuccess()),
       catchError(err => of(new fromActions.SignOutError(err.message)))
     ))
@@ -128,10 +130,11 @@ export class UserEffects {
     withLatestFrom(this.afAuth.authState.pipe(take(1))),
     map(([user, state]) => ({
       ...user,
-      uid: state?.uid,
-      email: state?.email,
+      uid: state ? state.uid : '',
+      email: state!.email,
       created: firebase.firestore.FieldValue.serverTimestamp(),
-    })),
+    })
+    ),
     switchMap((user: User) => 
       from(this.afs.collection('users').doc(user.uid).set(user)).pipe(
         tap(() => this.router.navigate(['/profile', user.uid])),

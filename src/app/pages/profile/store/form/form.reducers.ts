@@ -1,11 +1,13 @@
+import { PersonalForm } from '../../pages/form/components/personal/personal.component';
+import { ProfessionalForm } from '../../pages/form/components/professional/professional.component';
 import { ProfileForm } from '../../pages/form/form.component'
 import * as fromActions from './form.actions';
 
 export type FormState = ProfileForm;
 
 const initialState: FormState = {
-  personal: null,
-  professional: null,
+  personal: {} as PersonalForm,
+  professional: {} as ProfessionalForm,
 }
 
 export function reducer(

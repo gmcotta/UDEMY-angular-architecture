@@ -23,7 +23,7 @@ export interface ProfessionalForm {
 })
 export class ProfessionalComponent implements OnInit, OnDestroy {
 
-  @Input() value?: ProfessionalForm;
+  @Input() value= {} as ProfessionalForm;
   @Input() dictionaries: Dictionaries | null = {} as Dictionaries;
 
   @Output() changed = new EventEmitter<ProfessionalForm>();
@@ -54,16 +54,18 @@ export class ProfessionalComponent implements OnInit, OnDestroy {
     }
 
     this.stepperService.check$
-      .pipe(takeUntil(this.destroy), tap(() => console.log('observable check - professional')))
+      .pipe(takeUntil(this.destroy))
       .subscribe(type => {
         if (this.form.invalid) {
+          console.log('professional is invalid');
           markFormGroupTouched(this.form);
           this.form.updateValueAndValidity();
           this.cdRef.detectChanges();
         } else {
+          console.log('professional is valid');
           this.changed.emit(this.form.value);
         }
-
+        console.log('veifiquei o form');
         this.stepperService[type].next(this.form.valid);
       });
   }

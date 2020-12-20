@@ -12,12 +12,12 @@ import { UserResolver } from './resolvers';
   declarations: [],
   imports: [
     CommonModule,
-    ProfileRoutingModule,
     StoreModule.forFeature('profile', reducers),
     EffectsModule.forFeature(effects),
+    ProfileRoutingModule,
   ],
   providers: [
-    UserResolver
-  ],
+    UserResolver,
+  ]
 })
 export class ProfileModule { }

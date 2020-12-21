@@ -20,5 +20,3 @@ export const reducers: ActionReducerMap<
 export const effects: any[] = [
   fromUser.UserEffects,
 ];
-
-export const getProfileState = createFeatureSelector<ProfileState>('profile');

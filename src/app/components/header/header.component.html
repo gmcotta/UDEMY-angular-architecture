@@ -32,7 +32,7 @@
     <div *ngIf="isAuthorized">
       <a
         class="app-a"
-        [routerLink]="['profile', 'new']"
+        (click)="onProfileNavigate()"
       >
         Profile
       </a>

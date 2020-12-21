@@ -1,1 +1,16 @@
-<p>display works!</p>
+<div class="app-page" *ngIf="(user$ | async)! as user"> 
+  <div class="app-page__header">
+    <h1>{{ user.name }}</h1>
+  </div>
+
+  <div class="app-page__content">
+    <div class="photo">
+      <aa-user-photo [photoURL]="user.photoURL"></aa-user-photo>
+    </div>
+  </div>
+
+  <div class="app-page__footer">
+    <a class="app-button" [routerLink]="['/profile', 'edit']">Edit</a>
+  </div>
+
+</div>

@@ -1,5 +1,6 @@
 <aa-header
-  [isAuthorized] = "isAuthorized$ | async"
-  (signOut) = "onSignOut()"
+  [isAuthorized]="isAuthorized$ | async"
+  [user]="(user$ | async)!"
+  (signOut)="onSignOut()"
 ></aa-header>
 <router-outlet></router-outlet>

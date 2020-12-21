@@ -1,6 +1,8 @@
 import { UserState } from './user.reducers';
-import { createSelector } from '@ngrx/store';
-import { getProfileState, ProfileState } from '..';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { ProfileState } from '..';
+
+export const getProfileState = createFeatureSelector<ProfileState>('profile');
 
 export const getUserState = createSelector(
   getProfileState,

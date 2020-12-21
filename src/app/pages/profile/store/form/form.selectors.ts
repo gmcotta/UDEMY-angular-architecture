@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { getProfileState, ProfileState } from '..';
+import { ProfileState } from '..';
+import { getProfileState } from '../user/user.selectors';
 import { FormState } from './form.reducers';
 
 export const getFormState = createSelector(

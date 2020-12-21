@@ -15,6 +15,7 @@ import { filter, take, tap } from 'rxjs/operators';
 export class AppComponent implements OnInit {
 
   isAuthorized$ = new Observable<boolean | null>();
+  user$ = new Observable<fromUser.User | undefined>();
 
   constructor(
     private store: Store<fromRoot.State>
@@ -24,6 +25,10 @@ export class AppComponent implements OnInit {
     this.isAuthorized$ = this.store.pipe(
       select(fromUser.getIsAuthorized)
     );
+    this.user$ = this.store.pipe(
+      select(fromUser.getUser)
+    );
+
     this.store.dispatch(new fromUser.Init());
     this.store.dispatch(new fromDictionaries.Read());
     // this.store.pipe(select(fromUser.getUserState))

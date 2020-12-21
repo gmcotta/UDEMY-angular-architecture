@@ -10,7 +10,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-  entity: {} as User,
+  entity: undefined,
   uid: null,
   loading: null,
   error: null,

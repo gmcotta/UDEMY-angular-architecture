@@ -34,7 +34,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
     dateInput: { day: 'numeric', month: 'short', year: 'numeric' },
     monthYearLabel: { year: 'numeric', month: 'short' },
     dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
-    monthYearA11yLabel: { yearn: 'numeric', month: 'long' },
+    monthYearA11yLabel: { year: 'numeric', month: 'long' },
   }
 }
 

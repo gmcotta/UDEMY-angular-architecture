@@ -33,6 +33,7 @@ export function reducer(
         uid: action.uid,
         entity: action.user,
         loading: false,
+        error: null,
       };
     };
     case fromActions.Types.INIT_UNAUTHORIZED: {

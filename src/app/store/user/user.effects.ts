@@ -48,7 +48,8 @@ export class UserEffects {
                 authState.uid, 
                 user!
               );
-            })
+            }),
+            catchError(err => of(new fromActions.InitError(err.message)))
           );
       } else {
         return of(new fromActions.InitUnauthorized());

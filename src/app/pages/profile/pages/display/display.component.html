@@ -7,6 +7,17 @@
     <div class="photo">
       <aa-user-photo [photoURL]="user.photoURL"></aa-user-photo>
     </div>
+
+    <p>
+      <b>About: {{user?.about}}</b>
+    </p>
+
+    <ng-container [ngSwitch]="user?.roleId">
+      <aa-employee *ngSwitchCase="'employee'" [role]="user.role">
+      </aa-employee>
+      <aa-recruiter *ngSwitchCase="'recruiter'" [role]="user.role">
+      </aa-recruiter>
+    </ng-container>
   </div>
 
   <div class="app-page__footer">

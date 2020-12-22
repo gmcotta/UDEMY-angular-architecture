@@ -1,0 +1,22 @@
+<p>
+  <b>Expected salary: </b> {{employee.expectedSalary | currency}}
+</p>
+<p>
+  <b>Specialization: </b> {{employee.specialization?.name}}
+</p>
+<p>
+  <b>Qualification: </b> {{employee.qualification?.name}}
+</p>
+<p class="employee__skills">
+  <b>Skills: </b>
+  <span class="skill" *ngFor="let skill of employee.skills">
+    {{skill?.name}}
+  </span>
+</p>
+<p>
+  <b>Experiences: </b>
+</p>
+<p *ngFor="let experience of employee.experiences">
+  {{experience?.companyName}}
+  {{experience?.period?.from | date}} &mdash; {{experience?.period?.to | date}}
+</p>

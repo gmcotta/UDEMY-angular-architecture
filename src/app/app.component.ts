@@ -30,13 +30,12 @@ export class AppComponent implements OnInit {
     );
 
     this.store.dispatch(new fromUser.Init());
-    this.store.dispatch(new fromDictionaries.Read());
-    // this.store.pipe(select(fromUser.getUserState))
-    //   .pipe(
-    //     tap((state) => console.log(state)),
-    //     filter(state => !!state.uid),
-    //     take(1)
-    //   ).subscribe(() => this.store.dispatch(new fromDictionaries.Read()));
+    this.store.pipe(select(fromUser.getUserState))
+      .pipe(
+        tap((state) => console.log(state)),
+        filter(state => !!state.uid),
+        take(1)
+      ).subscribe(() => this.store.dispatch(new fromDictionaries.Read()));
   }
 
   onSignOut(): void {
